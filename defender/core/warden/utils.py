@@ -70,8 +70,7 @@ async def run_user_regex(*, rule_obj, cog, guild: discord.Guild, regex: str, tex
             return False
 
 def make_fuzzy_suggestion(term, _list):
-    result = process.extract(term, _list, limit=1, scorer=fuzz.QRatio)
-    result = [[key, score] for key, score, __ in result if score > 10]
+    result = process.extract(term, _list, limit=1, scorer=fuzz.QRatio, score_cutoff=10)
     if result:
         return f" Did you mean `{result[0][0]}`?"
     else:
